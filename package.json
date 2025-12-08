@@ -1,0 +1,19 @@
+{
+  "name": "prajplaywrightproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test" : "playwright test",
+    "test:ui" : "playwright test tests/ui",
+    "test:smoke":"playwright test -g '@smoke'",
+    "test:report":"playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^24.10.1"
+  }
+}
