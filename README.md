@@ -1,4 +1,4 @@
-Playwright TypeScript Automation Framework
+Playwright TypeScript Automation Framework + Optional AI failure analysis
 
 Modern, scalable end-to-end test automation framework built with Playwright + TypeScript using industry-standard design patterns.
 

@@ -1,16 +1,19 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, type TestInfo } from '@playwright/test';
 import { LoginPage } from '../../Pages/LoginPage';
 import { ProductsPage } from '../../Pages/ProductsPage';
 import { CartPage } from '../../Pages/CartPage';
 import { CheckoutPage } from '../../Pages/CheckoutPage';
-import { cartData } from '../../test-data/cartData';
+import { cartData } from '../../test-data/cartData'
+import { analyzeFailure } from '../../utils/aiClient';
 
-test('E2E: user can complete checkout successfully', async ({ page }) => {
+test('E2E: user can complete checkout successfully', async ({ page }, testInfo: TestInfo ) => {
   const loginPage = new LoginPage(page);
   const productsPage = new ProductsPage(page);
   const cartPage = new CartPage(page);
   const checkoutPage = new CheckoutPage(page);
 
+
+  try {
   // 1. Login
   await page.goto('/');
   await loginPage.login(
@@ -39,4 +42,20 @@ test('E2E: user can complete checkout successfully', async ({ page }) => {
   // 6. Finish and validate order completion
   await checkoutPage.finishCheckout();
   await checkoutPage.assertOrderCompleted();
+
+} catch (error : any){
+
+  // AI Analysis happens here
+  const analysis = await analyzeFailure({
+   testName: testInfo.title,
+   error: error?.stack || String(error),
+   url: page.url(), 
+  });
+
+  console.log("\n====AI Failure Analysis===");
+  console.log(analysis);
+  console.log("============================\n");
+
+  throw error; //keep original failure for playwright reporting
+}
 });
