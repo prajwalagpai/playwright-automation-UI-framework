@@ -5,7 +5,7 @@ const envs = {
     baseURL: 'https://www.saucedemo.com',
   },
   stg: {
-    baseURL: 'https://www.devsaucedemo.com', // change if you have a dev URL
+    baseURL: 'https://www.stgsaucedemo.com', // change if you have a dev URL
   },
 };
 

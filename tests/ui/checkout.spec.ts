@@ -12,7 +12,6 @@ test('E2E: user can complete checkout successfully', async ({ page }, testInfo: 
   const cartPage = new CartPage(page);
   const checkoutPage = new CheckoutPage(page);
 
-
   try {
   // 1. Login
   await page.goto('/');

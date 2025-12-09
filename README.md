@@ -1,69 +1,128 @@
-Playwright TypeScript Automation Framework + Optional AI failure analysis
+# Playwright UI Automation Framework (TypeScript)
 
-Modern, scalable end-to-end test automation framework built with Playwright + TypeScript using industry-standard design patterns.
+A clean, scalable, and fully functional **UI Automation Framework** built using **Playwright + TypeScript**.  
+This project showcases modern automation principles including Page Object Model (POM), reusable components, 
+multi-environment configuration, CI/CD integration, and test reporting.
 
-Features
 
-Page Object Model (POM)
-Environment-based configuration (dev / test / prod)
-Reusable BasePage with shared browser utilities
-E2E checkout flow (Saucedemo demo app)
-Component-level tests (login, add to cart, remove from cart)
-Data-driven testing with TypeScript & JSON
-Playwright HTML report + video + screenshot on failure
-Azure/GitHub CI pipeline integrated
-Modular folder structure for enterprise scaling
+##  Key Features
 
-Folder Structure
+- **Playwright + TypeScript** modern automation stack  
+- **Page Object Model (POM)** with reusable selectors and actions  
+- **Environment-based execution** (test, stg)  
+- **Reusable test data** via JSON  
+- **Visual test artifacts** → Screenshot + Video + Trace  
+- **CI/CD using GitHub Actions**  
+- **Supports parallel execution**  
+- **HTML Reporter** integrated  
+- (Optional) **AI-Powered Test Failure Analysis** support
 
-├── config
-│   └── environment.ts
-├── pages
-│   ├── BasePage.ts
+##  Project Structure
+
+playwright-automation-UI-framework
+│
+├── config/
+│   └── environment.ts        # Environment-specific base URLs
+├── Pages/
 │   ├── LoginPage.ts
 │   ├── ProductsPage.ts
 │   ├── CartPage.ts
-│   └── CheckoutPage.ts
-├── test-data
-│   └── users.json
-├── tests
+│   ├── CheckoutPage.ts
+│   └── BasePage.ts           # Reusable helpers (click, type, wait, etc.)
+├── test-data/
+│   ├── cartData.json         # User + product test data
+├── tests/ui/
 │   ├── login.spec.ts
+│   ├── logout.spec.ts
 │   ├── add-to-cart.spec.ts
-│   ├── cart-remove.spec.ts
+│   ├── cart-remove-continue.spec.ts
 │   └── checkout.e2e.spec.ts
-├── playwright.config.ts
-└── .github/workflows/playwright.yml
+├── utils/
+│   └── aiClient.ts (optional) # AI error analysis helper
+├── playwright.config.ts      # Global configuration
+├── package.json
+└── README.md
 
-Sample Test :
+## Page Object Model (POM)
 
-test("User completes checkout flow", async ({ page }) => {
-    const login = new LoginPage(page);
-    const products = new ProductsPage(page);
-    const cart = new CartPage(page);
-    const checkout = new CheckoutPage(page);
-    await login.goto();
-    await login.login("standard_user", "secret_sauce");
-    await products.addProductToCartByName("Sauce Labs Backpack");
-    await products.openCart();
-    await cart.proceedToCheckout();
-    await checkout.fillCustomerDetails({
-    firstName: "Praj",
-    lastName: "Pai",
-    postalCode: "3000"
-});
-    await checkout.finishOrder();
-    await checkout.verifySuccessMessage();
-});
+Each workflow step in your application is abstracted into page classes.
 
-Installation and Execution :
+Example:
 
+```ts
+await loginPage.login(username, password);
+await productsPage.addItemToCartByName("Sauce Labs Backpack");
+await cartPage.clickCheckout();
+await checkoutPage.fillCheckoutInformation(first, last, postal) 
+```
+## Environment Configuration
+
+Your framework supports multiple environments (`test`, `stg`).
+```
+environment.ts:
+playwright.config.ts:
+
+```
+##  Test Reports
+
+Playwright generates:
+-  Screenshots  
+-  Video recordings  
+-  Trace viewer  
+-  HTML Report  
+
+ Open report:
+
+```
+npx playwright show-report
+```
+## Optional: AI-Powered Failure Analysis
+
+When enabled:
+
+- Captures failed test details  
+- Sends to AI model  
+- Returns debugging suggestions  
+
+This module (`aiClient.ts`) is optional and can be enabled later.
+
+---
+
+## CI/CD Pipeline — GitHub Actions
+
+This project includes a full CI pipeline that:
+
+- Installs dependencies  
+- Installs Playwright browsers  
+- Runs tests  
+- Uploads HTML report  
+- Executes across multiple environments
+
+.playwright.yml:
+
+```yaml
+name: Playwright Tests
+```
+
+## ▶️ Running Tests Locally
+
+Clone:
+
+git clone https://github.com/prajwalagapi/playwright-automation-UI-framework.git
+cd playwright-automation-UI-framework
+
+Install dependencies:
 npm install
+
+Install browsers:
 npx playwright install
-npx playwright test
-npx playwright test --project=chromium
 
-Uses GitHub actions to:
+##  Author
 
-Install dependencies
-Run Playwright tests headless
-Upload HTML report as artifact
+**Prajwala Pai**  
+Melbourne, Australia  
+QA Automation Engineer – Playwright | API | DevOps
+
+---
+
+⭐ If you like this project, please star the repository!
