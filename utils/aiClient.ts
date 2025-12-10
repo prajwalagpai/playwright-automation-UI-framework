@@ -2,9 +2,6 @@
 import "dotenv/config";
 import OpenAI from "openai";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
 
 export async function analyzeFailure(params: {
   testName: string;
@@ -12,10 +9,15 @@ export async function analyzeFailure(params: {
   url?: string;
   extraContext?: string;
 }): Promise<string> {
-  if (!process.env.OPENAI_API_KEY) {
-    return "AI analysis skipped: No API key found.";
+  const apiKey = process.env.OPENAI_API_KEY;
+  //In CI no kety this will run and return
+  //no test pass and AI step is just skipped
+  if (!apiKey) {
+    console.log("[AI] skipping analysis - no OPENAI_API_KEY configured");
+    return "AI analysis skipped. No API key found.";
   }
-
+  // only create the clent when we actually have the key
+  const client = new OpenAI ({apiKey});
   const { testName, error, url, extraContext } = params;
 
   const prompt = `

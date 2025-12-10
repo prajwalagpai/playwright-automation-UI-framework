@@ -49,8 +49,9 @@ test('E2E: user can complete checkout successfully', async ({ page }, testInfo: 
   // AI Analysis happens here
   const analysis = await analyzeFailure({
    testName: testInfo.title,
-   error: error?.stack || String(error),
+   error: String(error),
    url: page.url(), 
+   extraContext : "Any extra details you want",
   });
 
   console.log("\n====AI Failure Analysis===");
