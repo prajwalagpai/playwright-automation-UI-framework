@@ -1,11 +1,11 @@
-export type EnvironmentName = 'test' | 'stg';
+export type EnvironmentName = 'test' ;
 
 const envs = {
   test: {
     baseURL: 'https://www.saucedemo.com',
   },
   stg: {
-    baseURL: 'https://www.stgsaucedemo.com', // change if you have a dev URL
+    baseURL: 'https://www.stgsaucedemo.com', // change if you have a stg URL
   },
 };
 

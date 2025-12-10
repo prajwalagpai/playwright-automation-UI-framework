@@ -9,7 +9,7 @@ jobs:
     # run the same job for each environmnet
     strategy:
        matrix:
-           environmnet : [test, stg]  
+           environmnet : [test]  
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
