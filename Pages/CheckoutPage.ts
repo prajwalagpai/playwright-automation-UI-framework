@@ -11,6 +11,7 @@ export class CheckoutPage extends BasePage {
     readonly finishButton : Locator;
     readonly backHomeButton : Locator;
     readonly completeHeader : Locator;
+    readonly cartErrorMessage : Locator;
 
     constructor( page : Page ) {
     super(page);
@@ -24,6 +25,7 @@ export class CheckoutPage extends BasePage {
     this.finishButton = page.locator('[data-test="finish"]');
     this.backHomeButton = page.locator('[data-test="back-to-products"]');
     this.completeHeader = page.locator ('[data-test="complete-header"]');
+    this.cartErrorMessage = page.locator('[data-test="error"]');
     }
 
     // setp 1 : Fill your details
@@ -60,14 +62,13 @@ export class CheckoutPage extends BasePage {
 
     // step 6 : Back home to products
     async backToProducst() : Promise<void> {
-    await this.backHomeButton.click();    
+    await this.backHomeButton.click();  
     }
+
+     // Error Message
+     async assertErrorMessage(expectedMessage : string){
+     await expect(this.cartErrorMessage).toBeVisible();
+     await expect(this.cartErrorMessage).toHaveText(expectedMessage);
+     }
     
-
-
-
-
-
-
-
 };

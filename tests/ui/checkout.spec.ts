@@ -6,6 +6,8 @@ import { CheckoutPage } from '../../Pages/CheckoutPage';
 import { cartData } from '../../test-data/cartData'
 import { analyzeFailure } from '../../utils/aiClient';
 
+test.describe ('Checkout - Positive E2E scenarios @negative', () =>{
+
 test('E2E: user can complete checkout successfully', async ({ page }, testInfo: TestInfo ) => {
   const loginPage = new LoginPage(page);
   const productsPage = new ProductsPage(page);
@@ -58,3 +60,55 @@ test('E2E: user can complete checkout successfully', async ({ page }, testInfo: 
   throw error; //keep original failure for playwright reporting
 }
 });
+});
+
+test.describe ('Checkout - Negative scenarios @negative', () => {
+let loginPage: LoginPage;
+let productsPage: ProductsPage;
+let cartPage: CartPage;
+let checkoutPage: CheckoutPage;
+
+test.beforeEach(async ({page})  => {
+loginPage = new LoginPage(page);
+productsPage= new ProductsPage(page);
+cartPage = new CartPage(page);
+checkoutPage = new CheckoutPage(page);
+
+await page.goto('/');
+await loginPage.login(cartData.user.username,cartData.user.password);
+
+await productsPage.addItemToCartByName(cartData.productsToAdd[0]);
+await productsPage.openCart(); // or goToCart()
+
+await cartPage.clickCheckout();
+});
+
+test('should show error when the Firstname is empty @negative', async ({page}) => {
+await checkoutPage.fillCheckoutInformation('',cartData.user.lastname,cartData.user.postalcode);
+
+await checkoutPage.continueToOverview(); 
+await checkoutPage.assertErrorMessage ('Error: First Name is required');
+});
+
+test('should show error message with the Lastname is empty @nagative', async ({page}) => {
+await checkoutPage.fillCheckoutInformation(cartData.user.firstname,'',cartData.user.postalcode);
+
+await checkoutPage.continueToOverview();
+await checkoutPage.assertErrorMessage('Error: Last Name is required');
+});
+
+test('should show error message when the postcode is empty @negative', async ({page}) => {
+await checkoutPage.fillCheckoutInformation(cartData.user.firstname, cartData.user.lastname,'');
+
+await checkoutPage.continueToOverview();
+await checkoutPage.assertErrorMessage('Error: Postal Code is required');
+});
+
+test('should show error message when all the fields are empty @negative', async ({page}) => {
+await checkoutPage.fillCheckoutInformation('','','');
+
+await checkoutPage.continueToOverview();
+await checkoutPage.assertErrorMessage('Error: First Name is required');
+});
+});
+
