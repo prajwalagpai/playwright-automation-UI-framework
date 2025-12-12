@@ -11,6 +11,13 @@ export const cartData = {
     productsToAdd : [
         'Sauce Labs Backpack',
         'Sause Labs Bike Light'
+    ],
+    sortingOptions : [
+        'Name (A to Z)',
+        'Name (Z to A)',
+        'Price (low to high)',
+        'Price (high to low)'
     ]
     };
+
 

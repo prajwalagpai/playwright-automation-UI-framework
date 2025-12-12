@@ -22,12 +22,11 @@ export class LoginPage extends BasePage {
     await this.goto('/');
   }
 
-  async login(username: string, password: string) {
-    await this.usernameInput.fill(username);
-    await this.passwordInput.fill(password);
-    await this.loginButton.click();
-  }
-
+async login(username: string, password: string) {
+  await this.usernameInput.fill(username);
+  await this.passwordInput.fill(password);
+  this.loginButton.click()
+}
   async assertOnProductsPage() {
     await expect(this.page).toHaveURL(/inventory.html/);
   }
