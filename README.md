@@ -18,6 +18,38 @@ The framework is intentionally structured to be **scalable, maintainable, and pr
 
 ---
 
+## 🛠️ Setup & Installation
+
+This project is built using **Playwright with Node.js** and was developed using **Visual Studio Code**. 
+The setup is minimal and straightforward.
+
+---
+
+### Prerequisites
+The following must be installed on the machine before working with this project:
+
+- **Node.js (LTS)** – required to run Playwright (npm comes bundled)
+- **Git** – required for cloning the repository and version control
+
+---
+
+### Tools Installed
+After setting up the IDE, the following tools were installed as part of the project setup:
+
+- **Playwright (project-level installation via npm)** 
+  Installed using:
+  ```bash
+  npm install
+  npx playwright install
+
+### VS Code Extensions Installed
+- **Playwright Test for VS Code**
+- **GitHub Copilot**
+- **GitHub Copilot Chat**
+
+### CI Setup
+- **GitHub Actions** (configured under `.github/workflows/` to run Playwright tests in CI)
+
 ## ✨ Key Features
 
 - UI automation using Playwright with TypeScript  
