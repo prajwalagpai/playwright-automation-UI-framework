@@ -29,12 +29,13 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  snapshotPathTemplate: '{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}',
   use: {
     baseURL : envConfig.baseURL,
     ignoreHTTPSErrors : true,
     headless : !!process.env.CI,
     launchOptions : {
-    slowMo : 1000,
+    slowMo : 100,
     },
     screenshot : 'on',
     video : 'on',

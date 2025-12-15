@@ -1,7 +1,7 @@
  Playwright Automation Framework (UI + API)
 
-![UI Tests](https://github.com/<your-username>/<repo-name>/actions/workflows/ui-tests.yml/badge.svg)
-![API Tests](https://github.com/<your-username>/<repo-name>/actions/workflows/api-tests.yml/badge.svg)
+![UI Tests](https://github.com/prajwalagpai/playwright-automation-UI-framework/actions/workflows/ui-tests.yml/badge.svg)
+![API Tests](https://github.com/prajwalagpai/playwright-automation-UI-framework/actions/workflows/api-tests.yml/badge.svg)
 ![Playwright](https://img.shields.io/badge/Playwright-45ba4b?logo=playwright&logoColor=white)
 
 
