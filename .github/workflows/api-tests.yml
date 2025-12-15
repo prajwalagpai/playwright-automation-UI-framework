@@ -13,9 +13,9 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     env:
-     # this goes into process.env.ENV in your config 
-     ENV : ${{ matrix.environmnet}}
-     API_KEY: ${{ secrets.REQRES_API_KEY }}
+      # this goes into process.env.ENV in your config 
+      ENV: ${{ matrix.environmnet}}
+      REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
