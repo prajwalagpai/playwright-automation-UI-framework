@@ -1,7 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import { getEnvConfig, EnvironmentName } from './config/environment';
 
-
 const env = (process.env.ENV as EnvironmentName) || 'test';
 const envConfig = getEnvConfig(env);
 
@@ -31,6 +30,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     baseURL : envConfig.baseURL,
+    ignoreHTTPSErrors : true,
     headless : !!process.env.CI,
     launchOptions : {
     slowMo : 1000,

@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: API Tests
 on:
   push:
     branches: [ main, master ]
@@ -15,6 +15,7 @@ jobs:
     env:
      # this goes into process.env.ENV in your config 
      ENV : ${{ matrix.environmnet}}
+     API_KEY: ${{ secrets.REQRES_API_KEY }}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -22,15 +23,12 @@ jobs:
         node-version: lts/*
     - name: Install dependencies
       run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
+    - name: Run API tests
+      run: npx run test:api
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
-        name: playwright-artifacts
+        name: api-test-artifacts
         path: |
-          playwright-report
           test-results
         retention-days: 30
