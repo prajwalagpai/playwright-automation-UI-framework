@@ -1,6 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 import { getEnvConfig, EnvironmentName } from './config/environment';
 
+
 const env = (process.env.ENV as EnvironmentName) || 'test';
 const envConfig = getEnvConfig(env);
 
@@ -48,9 +49,9 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    /*{
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+    {
+      name: 'Microsoft Edge',
+      use: { ...devices['Desktop ch'] },
     },/*
 
     {

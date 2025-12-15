@@ -1,5 +1,10 @@
  Playwright Automation Framework (UI + API)
 
+![UI Tests](https://github.com/<your-username>/<repo-name>/actions/workflows/ui-tests.yml/badge.svg)
+![API Tests](https://github.com/<your-username>/<repo-name>/actions/workflows/api-tests.yml/badge.svg)
+![Playwright](https://img.shields.io/badge/Playwright-45ba4b?logo=playwright&logoColor=white)
+
+
 **Author:** Prajwala Govind Pai  
 **Location:** Melbourne, Australia  
 **Role:** QA Automation Engineer  
