@@ -1,128 +1,173 @@
-# Playwright UI Automation Framework (TypeScript)
+ Playwright Automation Framework (UI + API)
 
-A clean, scalable, and fully functional **UI Automation Framework** built using **Playwright + TypeScript**.  
-This project showcases modern automation principles including Page Object Model (POM), reusable components, 
-multi-environment configuration, CI/CD integration, and test reporting.
-
-
-##  Key Features
-
-- **Playwright + TypeScript** modern automation stack  
-- **Page Object Model (POM)** with reusable selectors and actions  
-- **Environment-based execution** (test, stg)  
-- **Reusable test data** via JSON  
-- **Visual test artifacts** → Screenshot + Video + Trace  
-- **CI/CD using GitHub Actions**  
-- **Supports parallel execution**  
-- **HTML Reporter** integrated  
-- (Optional) **AI-Powered Test Failure Analysis** support
-
-##  Project Structure
-
-playwright-automation-UI-framework
-│
-├── config/
-│   └── environment.ts        # Environment-specific base URLs
-├── Pages/
-│   ├── LoginPage.ts
-│   ├── ProductsPage.ts
-│   ├── CartPage.ts
-│   ├── CheckoutPage.ts
-│   └── BasePage.ts           # Reusable helpers (click, type, wait, etc.)
-├── test-data/
-│   ├── cartData.json         # User + product test data
-├── tests/ui/
-│   ├── login.spec.ts
-│   ├── logout.spec.ts
-│   ├── add-to-cart.spec.ts
-│   ├── cart-remove-continue.spec.ts
-│   └── checkout.e2e.spec.ts
-├── utils/
-│   └── aiClient.ts (optional) # AI error analysis helper
-├── playwright.config.ts      # Global configuration
-├── package.json
-└── README.md
-
-## Page Object Model (POM)
-
-Each workflow step in your application is abstracted into page classes.
-
-Example:
-
-```ts
-await loginPage.login(username, password);
-await productsPage.addItemToCartByName("Sauce Labs Backpack");
-await cartPage.clickCheckout();
-await checkoutPage.fillCheckoutInformation(first, last, postal) 
-```
-## Environment Configuration
-
-Your framework supports multiple environments (`test`, `stg`).
-```
-environment.ts:
-playwright.config.ts:
-
-```
-##  Test Reports
-
-Playwright generates:
--  Screenshots  
--  Video recordings  
--  Trace viewer  
--  HTML Report  
-
- Open report:
-
-```
-npx playwright show-report
-```
-## Optional: AI-Powered Failure Analysis
-
-When enabled:
-
-- Captures failed test details  
-- Sends to AI model  
-- Returns debugging suggestions  
-
-This module (`aiClient.ts`) is optional and can be enabled later.
+**Author:** Prajwala Govind Pai  
+**Location:** Melbourne, Australia  
+**Role:** QA Automation Engineer  
+**Tech Stack:** Playwright, TypeScript, UI & API Automation, CI/CD  
 
 ---
 
-## CI/CD Pipeline — GitHub Actions
+This repository contains a **Playwright + TypeScript automation framework** designed to demonstrate **real-world UI and API automation practices**, including **visual regression testing** and **CI/CD integration using GitHub Actions**.
 
-This project includes a full CI pipeline that:
+The framework is intentionally structured to be **scalable, maintainable, and production-ready**, rather than a simple demo project.
 
-- Installs dependencies  
-- Installs Playwright browsers  
-- Runs tests  
-- Uploads HTML report  
-- Executes across multiple environments
+---
 
-.playwright.yml:
+## ✨ Key Features
 
-```yaml
-name: Playwright Tests
-```
+- UI automation using Playwright with TypeScript  
+- API automation using Playwright `APIRequestContext`  
+- Visual regression testing for critical UI pages  
+- Page Object Model (POM) implementation  
+- Environment-based configuration  
+- Secure secrets management  
+- CI/CD integration using GitHub Actions  
+- Separate pipelines for UI and API tests  
+- Cross-browser testing support  
+- GitHub Copilot-assisted development  
+
+---
+
+## 🧱 Framework Architecture
+
+### Page Object Model (POM)
+- Clear separation between test logic and UI interactions  
+- Reusable page classes for improved maintainability  
+- Reduced duplication and better readability  
+
+### Separation of Concerns
+- UI tests and API tests are fully isolated  
+- API logic implemented through a dedicated client layer  
+- Independent execution paths for faster and clearer feedback  
+
+## 🌍 Environment Configuration
+
+- Supports multiple environments (e.g. `test`, `stg`)  
+- Centralised configuration through a config loader  
+- Environment selected via `process.env.ENV`  
+- Clean separation between UI and API configuration  
+
+---
+
+## 🔐 Secrets Management
+
+- Local execution uses a `.env` file (never committed)  
+- CI/CD uses **GitHub Actions Secrets**  
+- API keys and sensitive values are injected securely at runtime  
+- Secrets are never exposed in source code or logs  
+
+---
+
+## 🧪 UI Automation
+
+- Functional UI tests covering:
+  - Login  
+  - Product listing  
+  - Cart  
+  - Checkout flows  
+- Uses Playwright assertions and fixtures  
+- Screenshots, videos, and traces captured on failures  
+- Cross-browser execution supported  
+
+---
+
+## 🔗 API Automation
+
+- API automation built using Playwright `APIRequestContext`  
+- Tests implemented against the public **Reqres API** (https://reqres.in)  
+- Dedicated API client layer for clean request handling  
+- Covers:
+  - Positive API scenarios  
+  - Negative and validation scenarios  
+- API tests run independently from UI tests  
+
+### API Configuration
+- Base API URL configured via `config/environment.ts`  
+- API authentication handled using environment variables  
+- `REQRES_API_KEY`:
+  - Stored in `.env` for local execution  
+  - Stored in GitHub Actions Secrets for CI/CD  
+- API-specific configuration isolated in `config/apiEnv.ts`  
+
+---
+
+## 👀 Visual Regression Testing
+
+- Minimal visual regression implemented for the **Login page**  
+- Covers:
+  - Default state  
+  - Error state  
+- Snapshot-based comparison using Playwright  
+- Baseline screenshots committed and validated in CI  
+- Designed to be stable and low-maintenance  
+
+---
+
+## 🌐 Cross-Browser Testing
+
+Configured using Playwright projects:
+- Chromium (Chrome)  
+- Microsoft Edge  
+
+Browser configuration is defined in `playwright.config.ts`.
+
+---
+
+## 🚀 CI/CD – GitHub Actions
+
+### UI Pipeline
+- Runs UI functional tests  
+- Executes visual regression tests  
+- Runs on Chromium and Microsoft Edge  
+- Uploads Playwright reports and artifacts  
+
+### API Pipeline
+- Runs API tests independently  
+- Injects API secrets securely  
+- Provides fast feedback for backend validation  
+
+Both pipelines run on **GitHub-hosted Ubuntu runners**.
+
+---
+
+### CI Test Artifacts (GitHub Actions)
+- When tests run in CI, Playwright reports and screenshots are uploaded as artifacts
+- To view them:
+1. Go to the **Actions** tab in this repository
+2. Select a workflow run (UI or API pipeline)
+3. Scroll to **Artifacts**
+4. Download the Playwright report
+5. Open `index.html` locally to view screenshots, videos, and trace files
 
 ## ▶️ Running Tests Locally
 
-Clone:
-
-git clone https://github.com/prajwalagapi/playwright-automation-UI-framework.git
-cd playwright-automation-UI-framework
-
-Install dependencies:
+```bash
 npm install
+```
 
-Install browsers:
-npx playwright install
+**Run UI tests**
+```bash
+npx playwright test tests/ui
+```
 
-##  Author
+**Run API tests**
+```bash
+npx playwright test tests/api
+```
 
-**Prajwala Pai**  
-Melbourne, Australia  
-QA Automation Engineer – Playwright | API | DevOps
+**Update visual regression snapshots**
+```bash
+npx playwright test tests/ui/visual-login.spec.ts --update-snapshots
+```
 
 ---
 
-⭐ If you like this project, please star the repository!
+## 🎯 Why This Framework?
+
+This framework demonstrates:
+- End-to-end automation ownership  
+- UI, API, and visual testing in a single solution  
+- CI/CD-ready automation practices  
+- Secure configuration and secrets handling  
+- Scalable design aligned with enterprise automation standards  
+

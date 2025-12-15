@@ -25,7 +25,12 @@ export class LoginPage extends BasePage {
 async login(username: string, password: string) {
   await this.usernameInput.fill(username);
   await this.passwordInput.fill(password);
-  this.loginButton.click()
+  await this.loginButton.click();
+  // wait briefly for either successful navigation or an error message to avoid races
+  await Promise.race([
+    this.page.waitForURL(/inventory.html/).catch(() => {}),
+    this.errorMessage.waitFor({ state: 'visible', timeout: 2000 }).catch(() => {}),
+  ]);
 }
   async assertOnProductsPage() {
     await expect(this.page).toHaveURL(/inventory.html/);
