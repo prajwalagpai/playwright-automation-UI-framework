@@ -10,6 +10,9 @@
 **Role:** QA Automation Engineer  
 **Tech Stack:** Playwright, TypeScript, UI & API Automation, CI/CD  
 
+## License
+This project is licensed under the MIT License © 2025 Prajwala Govind Pai.
+
 ---
 
 This repository contains a **Playwright + TypeScript automation framework** designed to demonstrate **real-world UI and API automation practices**, including **visual regression testing** and **CI/CD integration using GitHub Actions**.
@@ -26,8 +29,8 @@ The setup is minimal and straightforward.
 ---
 
 ### Prerequisites
-The following must be installed on the machine before working with this project:
 
+The following must be installed on the machine before working with this project:
 - **Node.js (LTS)** – required to run Playwright (npm comes bundled)
 - **Git** – required for cloning the repository and version control
 
@@ -43,6 +46,7 @@ After setting up the IDE, the following tools were installed as part of the proj
   npx playwright install
 
 ### VS Code Extensions Installed
+
 - **Playwright Test for VS Code**
 - **GitHub Copilot**
 - **GitHub Copilot Chat**
