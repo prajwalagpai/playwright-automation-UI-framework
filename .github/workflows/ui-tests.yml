@@ -25,7 +25,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run UI tests
-      run: npx run test:ui
+      run: npx playwright test tests/ui
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
