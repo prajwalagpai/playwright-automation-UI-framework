@@ -1,5 +1,5 @@
 import { APIRequestContext } from "@playwright/test";
-import { getEnvConfig } from "../../config/environment";
+import { EnvironmentName, getEnvConfig } from "../../config/environment";
 import { REQRES_API_KEY } from '../../config/apiEnv';
 
 export interface CreateUserPayload {
@@ -13,7 +13,8 @@ export class UserClient {
 
     constructor(request: APIRequestContext) {
         this.request = request;
-        const envConfig = getEnvConfig((process.env.ENV as 'test') || 'test');
+        const envName = (process.env.ENV as EnvironmentName) ?? 'test';
+        const envConfig = getEnvConfig(envName);
         // prefer explicit apiBaseURL, fallback to baseURL when apiBaseURL is not present
         // some environment configs in this repo expose `baseURL` (UI) rather than `apiBaseURL`.
         // keep this resilient to both shapes.
